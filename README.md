@@ -8,7 +8,6 @@ We can then use REST API (though the *requests* library) to retrieve files, gene
 - [Part 1: Configuring Solution Environment](#part-1-configuring-solution-environment)
 - [Part 2: Calling Code Interpereter tool]()
 - [Part 3: Retrieving output files from container]()
----
 
 ## Part 1: Configuring Solution Environment
 To use the notebook, set up your Azure OpenAI environment and install Python packages.
@@ -35,5 +34,7 @@ Set the following environment variables, pointing to your Azure OpenAI GPT deplo
 pip install requests Pillow ipython azure-identity
 ```
 
-## Part 2: Performing Image Edits and Visualisation
-The `GPT-image-1.ipynb` notebook outlines the core image editing logic:
+## Part 2: Calling Code Interpereter tool
+
+
+## Part 3: Retrieving output files from container
