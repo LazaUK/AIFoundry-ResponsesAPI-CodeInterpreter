@@ -26,7 +26,7 @@ Set the following environment variables, pointing to your Azure OpenAI GPT deplo
 | Environment Variable     | Description                                                                             |
 | :----------------------- | :-------------------------------------------------------------------------------------- |
 | AOAI_API_BASE            | Your Azure OpenAI endpoint URL (e.g., https://<YOUR_AOAI_RESOURCE>.openai.azure.com).   |
-| AOAI_DEPLOYMENT_NAME     | The name of your GPT-image-1 deployment (e.g., gpt-4.1).                            |
+| AOAI_DEPLOYMENT          | The name of your model deployment (e.g., gpt-4.1).                                      |
 | AOAI_API_VERSION         | The API version for image edits (e.g., 2025-04-01-preview).                             |
 
 ### 1.4 Install Required Python packages
