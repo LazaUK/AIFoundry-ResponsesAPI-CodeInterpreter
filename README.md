@@ -94,7 +94,7 @@ When the Code Interpreter generates output files, their details (Container ID, F
 ### 3.2 REST API for Container Files' Content
 Retrieve the content of generated files using the REST API endpoint that references the temporary container ID and each file ID:
 ``` bash
-{AOAI_API_BASE}openai/v1/containers/{container_id}/files/{file_id}/content
+{AOAI_API_BASE}/openai/v1/containers/{container_id}/files/{file_id}/content
 ```
 
 ### 3.3 File Download and Display
