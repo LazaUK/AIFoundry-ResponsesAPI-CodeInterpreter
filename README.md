@@ -98,5 +98,5 @@ Retrieve the content of generated files using the REST API endpoint that referen
 ```
 
 ### 3.3 File Download and Display
-After retrieving and saving the file content bytes locally, you can display the outputs in your Jupyter notebook. For example, a data visualization might look like this:
+After retrieving and saving the file content bytes locally, you can display the outputs in your Jupyter notebook. For example, a data visualisation might look like this:
 ![Image of Contoso Operating Profit chart](images/contoso_operating_profit.png)
