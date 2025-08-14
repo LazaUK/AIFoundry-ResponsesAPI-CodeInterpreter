@@ -49,7 +49,7 @@ Install the necessary packages:
 pip install openai azure-identity requests Pillow ipython pathlib
 ```
 
-## Part 2: Calling Code Interpereter tool
+## Part 2: Calling Code Interpreter tool
 
 ### 2.1 Initialisation of Azure OpenAI client
 Initialise the Azure OpenAI with your environment variables and Entra ID token provider:
@@ -88,6 +88,8 @@ When the Code Interpreter generates output files, their details (Container ID, F
     "filename": "cfile_689df41900fc81909d22ec83e7dafbe1.png"
 }
 ```
+> [!WARNING]
+> Details shown above are examples. Your actual container ID, file IDs and file names may be different for each execution.
 
 ### 3.2 REST API for Container Files' Content
 Retrieve the content of generated files using the REST API endpoint that references the temporary container ID and each file ID:
