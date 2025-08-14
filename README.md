@@ -23,6 +23,14 @@ This demo uses **Azure Entra ID** authentication via `DefaultAzureCredential` fr
 
 To enable this, ensure your environment is set up for Azure authentication, e.g., by logging in via `az login` (Azure CLI) or setting relevant environment variables for service principals.
 
+You can define then a token provider, using _get_bearer_token_provider()_ function from **azure.identity** Python package.
+``` Python
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(),
+    "https://cognitiveservices.azure.com/.default"
+)
+```
+
 ### 1.3 Environment Variables
 Set the following environment variables, pointing to your Azure OpenAI GPT deployment:
 
@@ -32,14 +40,56 @@ Set the following environment variables, pointing to your Azure OpenAI GPT deplo
 | AOAI_DEPLOYMENT          | The name of your model deployment (e.g., gpt-4.1).                                      |
 | AOAI_API_VERSION         | The API version for image edits (e.g., 2025-04-01-preview).                             |
 
-### 1.4 Install Required Python packages
+### 1.4 Installation of Required Python Packages
 ``` Bash
 pip install requests Pillow ipython azure-identity
 ```
 
 ## Part 2: Calling Code Interpereter tool
 
+### 2.1 Initialisation of Azure OpenAI client
+Initialise Azure OpenAI with your environment variables and Entra ID token provider:
+``` Python
+client = AzureOpenAI(
+    azure_endpoint = AOAI_API_BASE,
+    azure_ad_token_provider = token_provider,
+    api_version = AOAI_API_VERSION,
+)
+```
+
+### 2.2 Responses API with Code Interpreter tool
+Code Interpreter should be added as a tool in Responses API call, along with an instruction (system prompt) to use relevant tool for the porcessing of user's input.
+``` Python
+response = client.responses.create(
+    model = AOAI_DEPLOYMENT,
+    tools = [
+        {
+            "type": "code_interpreter",
+            "container": {"type": "auto"}
+        }
+    ],
+    instructions = "You are a helpful data analyst. You should use Python tool to perform required calculations.",
+    input = INPUT_TEXT
+)
+```
 
 ## Part 3: Retrieving output files from container
 
+3.1 Details of Generated Files
+If Code Interpreter generated any output files, their details (Container ID, File ID and File name) can be retrieved from the "_annotations_" section of the Response API output, similar to what is shown below.
+``` JSON
+{
+    "container_id": "cntr_689df3cb69648190b73217f54eeb713806df641648828556",
+    "file_id": "cfile_689df41900fc81909d22ec83e7dafbe1",
+    "filename": "cfile_689df41900fc81909d22ec83e7dafbe1.png"
+}
+```
+
+3.2 REST API for Container Files' Content
+The content of generated files should be retrievable from the REST API endpoint, that refers temporary container's ID and each file's ID:
+``` JSON
+{AOAI_API_BASE}openai/v1/containers/{container_id}/files/{file_id}/content
+```
+
+3.3 After retrieving and saving bytes of content into the local file, you should be able to see an output similar to this in the Jupyter notebook.
 ![Image of Contoso Operating Profit chart](images/contoso_operating_profit.png)
